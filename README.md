@@ -50,6 +50,7 @@ D = 1010 0001 0011 1111
 4. The overall number of iterations is determined by the number of blocks in total. Since the size of one block is 16 bits, we can assume that the number of iterations is roughly the size of the file divided by two. If the size of the file is odd, the last block is fixed up by adding zeros at the end.
 5. Within each iteration, the algorithm does following operations:
 ![Screenshot](doc/hash-algorithm.png)
+
 If the index of the current block is even, function `F1` is used. Otherwise, the program uses function `F2`.
 ```c++
 for (int i = 0; i < (int)inputData.size(); i++) {
@@ -62,3 +63,4 @@ for (int i = 0; i < (int)inputData.size(); i++) {
 	memcpy(prev, next, sizeof(next));
 }
 ```
+6. After the last iteration has been done, values `A`, `B`, `C`, and `D` represent the final hash value of the input file.
