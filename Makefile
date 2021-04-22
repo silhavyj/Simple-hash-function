@@ -1,6 +1,6 @@
 TARGET = hash_BIT 
 SUBMIT_FILE = BIT_ukol5_jakub_silhavy.zip
-FILES_TO_SUBMIT = src Makefile README.md
+FILES_TO_SUBMIT = src Makefile README.md doc input
 CCX    = g++
 FLAGS  = -Wall -O2 -std=c++17 -pedantic-errors -Wextra -Werror
 SRC    = src

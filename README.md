@@ -52,6 +52,10 @@ D = 1010 0001 0011 1111
 ![Screenshot](doc/hash-algorithm.png)
 
 If the index of the current block is even, function `F1` is used. Otherwise, the program uses function `F2`.
+```
+F1(B,C) = (B AND C) XOR ( ¬ B AND C)
+F2(B,C) = (B OR C) AND (B XOR C)
+```
 ```c++
 for (int i = 0; i < (int)inputData.size(); i++) {
 	f = i & 1 ? F2(prev[B], prev[C]) : F1(prev[B], prev[C]);
