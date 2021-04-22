@@ -5,8 +5,6 @@
 
 #include "cxxopts.hpp"
 
-// F1(B,C) = (B AND C) XOR ( ¬ B AND C)
-// F2(B,C) = (B OR C) AND (B XOR C)
 #define F1(B,C) ((B & C) ^ (~B & C))
 #define F2(B,C) ((B | C) & (B ^ C))
 
