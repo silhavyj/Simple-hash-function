@@ -20,7 +20,7 @@ Usage:
 >
 ```
 ### input
-The program takes one required parameter, which happens to be the `input file` used to calculate the has value. There's no limitation as to what type the file should be. It can be both a text file or a binary file.
+The program takes one required parameter, which happens to be the `input file` used to calculate the hash value. There's no limitation as to what type the input file should be. It can be both a text file or a binary file.
 
 ### output
 The output is represented by a single value printed out on the screen. This 64-bit long number represents the final hash value of the file given as a parameter. For example, `fa0513e1aa06b891`. 
@@ -38,7 +38,7 @@ The algorithm of calculating the hash value of the the input file works the foll
 ```
 ```
 block_1 = 10111001  # first block used in the algorithm
-block_2 = 11111110	# second block used in the algorithm
+block_2 = 11111110  # second block used in the algorithm
 ```
 3. The initial values of the variables `A`, `B`, `C`, and `D` (initialization vector) are 
 ```
@@ -48,7 +48,7 @@ C = 1111 1101 0001 0111
 D = 1010 0001 0011 1111
 ```
 4. The overall number of iterations is determined by the number of blocks in total. Since the size of one block is 16 bits, we can assume that the number of iterations is roughly the size of the file divided by two. If the size of the file is odd, the last block is fixed up by adding zeros at the end.
-5. Within each iteration, the algorithm does following operations:
+5. Within each iteration, the algorithm does the following operations:
 ![Screenshot](doc/hash-algorithm.png)
 
 If the index of the current block is even, function `F1` is used. Otherwise, the program uses function `F2`.
@@ -58,13 +58,14 @@ F2(B,C) = (B OR C) AND (B XOR C)
 ```
 ```c++
 for (int i = 0; i < (int)inputData.size(); i++) {
-	f = i & 1 ? F2(prev[B], prev[C]) : F1(prev[B], prev[C]);
+    f = i & 1 ? F2(prev[B], prev[C]) : F1(prev[B], prev[C]);
 
-	next[A] = f ^ prev[D];
-	next[B] = prev[D];
-	next[C] = (prev[A] ^ prev[B]) ^ inputData[i];
-	next[D] = prev[C];
-	memcpy(prev, next, sizeof(next));
+    next[A] = f ^ prev[D];
+    next[B] = prev[D];
+    next[C] = (prev[A] ^ prev[B]) ^ inputData[i];
+    next[D] = prev[C];
+	
+    memcpy(prev, next, sizeof(next));
 }
 ```
 6. After the last iteration has been done, values `A`, `B`, `C`, and `D` represent the final hash value of the input file.
